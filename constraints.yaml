@@ -1,2 +1,31 @@
-putki: 123
-koira: 123
+
+tile_white:
+  thickness: 130
+  height: 70 # verify
+
+kipsilevy_13:
+  thickness: 13
+
+iv_kanava_160:
+  diameter: 160
+
+
+iv_tulo_pysty:
+  part_type: *iv_kanava_160
+
+
+
+room: &basement_entrance
+
+  basement_entrance_wall_east:
+    pintamaterial: *kipsilevy_13
+
+  basement_entrance_wall_north:
+    pintamaterial: *tile_white
+    thickness: *tile_white/height
+
+  walls:
+    - *basement_entrance_wall_east, *basement_entrance_wall_north
+
+
+
