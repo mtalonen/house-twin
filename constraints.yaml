@@ -14,6 +14,8 @@ iv_tulo_pysty:
   part_type: *iv_kanava_160
 
 
+foundation_west:
+  thickness: 310 # verify
 
 room: &basement_entrance
 
@@ -25,7 +27,14 @@ room: &basement_entrance
     thickness: *tile_white/height
 
   walls:
-    - *basement_entrance_wall_east, *basement_entrance_wall_north
+    - *basement_entrance_wall_east
+    - *basement_entrance_wall_north
 
 
 
+viemäri:
+  &segment1:
+    diameter: 100
+
+  ? *foundation_west : *segment1 :
+    distance: 300
