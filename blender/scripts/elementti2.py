@@ -44,9 +44,6 @@ def elementti(type1):
 
     mesh = bpy.data.meshes.new(name="Mesh")
     obj = bpy.data.objects.new(name="Elementti", object_data=mesh)
-    bpy.context.collection.objects.link(obj)
-    
-    obj.select_set(True)
     
     node_tree = obj.modifiers.new(name="Hello", type="NODES")    
     node_tree.node_group = bpy.data.node_groups.new("Elementti", 'GeometryNodeTree')
