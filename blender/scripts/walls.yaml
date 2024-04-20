@@ -1,0 +1,123 @@
+# west
+walls:
+  west1:
+    - I6T1
+    - U12T
+    - U6T
+    - I6T1
+    - U6T
+    - OVI_TOL10x23_1500
+    - U6T
+    - I6T1
+    - U9T
+    - I12T3
+    - I12T3
+    - U12T
+    - I6T3
+    - I6T3
+    - U6T
+    - U9T
+    - U12T
+  corner1:
+    - UKT
+
+  south1:
+    - U6T
+    - I12T4
+
+  corner2:
+    - SK
+
+  west2:
+    - I12T3
+    - U9T
+    - U9T
+    - U9T
+    - I12T1
+
+  corner3:
+    - UKT
+
+  south2:
+    - I12T3
+    - I6T1
+    - U12T
+    - U12T
+    - U12T
+    - I6T1
+    - I12T3
+
+  corner4:
+    - UKT
+
+  east1:
+    - I12T1
+    - U12T
+    - U6T
+    - U9T
+    - I12T4
+
+  corner5:
+    - UKT
+
+  north1:
+    - I6T4
+    - U6T
+
+  corner6:
+    - SK
+
+  east2:
+    - U3T
+    - I12T4
+    - I12T4
+    - U3T
+    - O12T3
+
+  corner7:
+    - DET_A2-2303
+
+  southEast1:
+    - I12T4
+    - I6T4
+
+  corner8:
+    - DET_A2-2303
+
+  south3:
+    - I12T4
+    - I12T4
+
+  corner9:
+    - UKT
+
+  east3:
+    - I12T4
+    - I12T4
+    - I12T4
+    - U9T
+    - U9T
+    - I6T1
+    - U9T
+    - U6T
+
+  corner10:
+    - UKT
+
+  north2:
+    - U6T
+    - I6T3
+    - I12T3
+    - U6T
+    - U9T
+    - I6T3
+    - I12T3
+    - U12T
+    - U9T
+    - I6T3
+    - U12T
+    - U12T
+    - U12T
+
+  corner11:
+    - UKT
