@@ -1,0 +1,70 @@
+shapes: &shapes
+ cube: 
+
+materials: &materials
+  chipboard_10:
+    thickness: 10
+  weather_protection_board:
+    thickness: 12
+  kovalevy:
+    thickness: 6.4
+  muovikelmu:
+    thickness: 0.2
+  vaneri:
+    thickness: 15
+  stud_45x45:
+    shape: *shapes.cube
+    width: 45
+    thickness: 45
+  tolppa90:
+    width: 90
+  villa:
+    thickness: 200
+
+sizes: &sizes
+  width12:
+    outer: 1193
+    inner: 1150
+    gap1: 525
+    gap2: 530
+  width9:
+    outer: 893
+    inner: 850
+  width6:
+    outer: 593
+    inner: 550
+    gap1: 377
+    gap2: 378
+  width3:
+    outer: 293
+    inner: 250
+  height:
+    outer: 2550
+    inner: 2590
+    inner_outer_offset: 20
+    window_normal_bottom: 965
+    window_normal_top: 230
+    lastulevy_to_window_big_top: 15
+    lastulevy_to_window_big_bottom: 5
+    window_up_bottom: 1830
+    window_up_top: 230
+    window_big_bottom: 480
+    window_big_top: 230
+    door_top: 230
+
+elementit:
+
+  components:
+    outer_sheathing:
+      material: *materials.weather_protection_board
+      width: *sizes.XXX
+    bottom_stud:
+      material: *materials.stud_45x45
+      length: 
+    left_stud:
+      material: *materials.stud_45x45
+      length: *sizes.height.outer
+    right_stud:
+      material: *materials.stud_45x45
+      length: *sizes.height.outer
+
