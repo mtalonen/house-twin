@@ -1,123 +1,123 @@
-# west
-walls:
-  west1:
-    - I6T1
-    - U12T
-    - U6T
-    - I6T1
-    - U6T
-    - OVI_TOL10x23_1500
-    - U6T
-    - I6T1
-    - U9T
-    - I12T3
-    - I12T3
-    - U12T
-    - I6T3
-    - I6T3
-    - U6T
-    - U9T
-    - U12T
-  corner1:
-    - UKT
+west1:
+  - I6T1
+  - U12T
+  - U6T
+  - I6T1
+  - U6T
+  - U15T #OVI_TOL10x23_1500
+  - U6T
+  - I6T1
+  - U9T
+  - I12T3
+  - I12T3
+  - U12T
+  - I6T3
+  - I6T3
+  - U6T
+  - U9T
+  - U12T
 
-  south1:
-    - U6T
-    - I12T4
+corner1:
+  - UKT
 
-  corner2:
-    - SK
+south1:
+  - U6T
+  - I12T4
 
-  west2:
-    - I12T3
-    - U9T
-    - U9T
-    - U9T
-    - I12T1
+corner2:
+  - SK
 
-  corner3:
-    - UKT
+west2:
+  - I12T3
+  - U9T
+  - U9T
+  - U9T
+  - I12T1
 
-  south2:
-    - I12T3
-    - I6T1
-    - U12T
-    - U12T
-    - U12T
-    - I6T1
-    - I12T3
+corner3:
+  - UKT
 
-  corner4:
-    - UKT
+south2:
+  - I12T3
+  - I6T1
+  - U12T
+  - U12T
+  - U12T
+  - I6T1
+  - I12T3
 
-  east1:
-    - I12T1
-    - U12T
-    - U6T
-    - U9T
-    - I12T4
+corner4:
+  - UKT
 
-  corner5:
-    - UKT
+east1:
+  - I12T1
+  - U12T
+  - U6T
+  - U12T
+  - U9T
+  - I12T4
 
-  north1:
-    - I6T4
-    - U6T
+corner5:
+  - UKT
 
-  corner6:
-    - SK
+north1:
+  - I6T4
+  - U6T
 
-  east2:
-    - U3T
-    - I12T4
-    - I12T4
-    - U3T
-    - O12T3
+corner6:
+  - SK
 
-  corner7:
-    - DET_A2-2303
+east2:
+  - U3T
+  - I12T4
+  - I12T4
+  - U3T
+  - U12T #O12T3
 
-  southEast1:
-    - I12T4
-    - I6T4
+corner7:
+  - DET_A2_2303
 
-  corner8:
-    - DET_A2-2303
+southEast1:
+  - I12T4
+  - I6T4
 
-  south3:
-    - I12T4
-    - I12T4
+corner8:
+  - DET_A2_2303
 
-  corner9:
-    - UKT
+south3:
+  - I12T4
+  - I12T4
 
-  east3:
-    - I12T4
-    - I12T4
-    - I12T4
-    - U9T
-    - U9T
-    - I6T1
-    - U9T
-    - U6T
+corner9:
+  - UKT
 
-  corner10:
-    - UKT
+east3:
+  - I12T4
+  - I12T4
+  - I12T4
+  - U9T
+  - U9T
+  - I6T1
+  - U9T
+  - U6T
 
-  north2:
-    - U6T
-    - I6T3
-    - I12T3
-    - U6T
-    - U9T
-    - I6T3
-    - I12T3
-    - U12T
-    - U9T
-    - I6T3
-    - U12T
-    - U12T
-    - U12T
+corner10:
+  - UKT
 
-  corner11:
-    - UKT
+north2:
+  - U6T
+  - I6T3
+  - I12T3
+  - U6T
+  - U9T
+  - I6T3
+  - I12T3
+  - U12T
+  - U9T
+  - I6T3
+  - U12T
+  - U12T
+  - U12T
+
+corner11:
+  - UKT

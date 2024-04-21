@@ -3,15 +3,16 @@ import re
 
 def elementti(type1):
 
-    r = re.compile("([a-zA-Z]+)([0-9]+)")
+    r = re.compile("([UI])([0-9]+)(T[134]?)")
     m = r.match(type1)
 
     type = m.group(1)
     w  = m.group(2)
-    width = int(w)/10 
+    type_detail = m.group(3)
+    width = int(w)/10 - 0.003
 
     depth = 0.2
-    height = 2.7
+    height = 2.55
 
     node_x_step = 200
 
@@ -20,13 +21,14 @@ def elementti(type1):
 
         small_height = 0.3
         normal_height = 1.2
+        large_height = 1.8
 
         top_position = 0.8
-        normal_position = 0.2
-        bottom_position = -0.6
+        normal_position = 0
+        bottom_position = 0
 
-        window_height = normal_height if window_type == 'middle' else small_height
-        window_position = top_position if window_type == 'top' else bottom_position if window_type == 'bottom' else normal_position
+        window_height = normal_height if window_type == 'middle' else small_height if window_type == 'top' else large_height
+        window_position = top_position if window_type == 'top' else bottom_position if window_type == 'large' else normal_position
 
         window_hole = node_group.nodes.new(type="GeometryNodeMeshCube")
         window_hole.location.y = y
@@ -57,15 +59,15 @@ def elementti(type1):
     window_cutter = node_group.nodes.new(type="GeometryNodeMeshBoolean")
     window_cutter.location.x = node_x_step    
 
-    if (type == 'b' or type == 'bm'):
-        window_bottom = window_nodes(node_group, window_type='bottom')
-        node_group.links.new(window_bottom.outputs["Geometry"], window_cutter.inputs["Mesh 2"])
+    if (type == 'I' and type_detail == 'T4'):
+        window_large = window_nodes(node_group, window_type='large')
+        node_group.links.new(window_large.outputs["Geometry"], window_cutter.inputs["Mesh 2"])
 
-    if (type == 'm' or type == 'bm'):
+    if (type == 'I' and type_detail == 'T3'):
         window_top = window_nodes(node_group, -600, window_type='middle')
         node_group.links.new(window_top.outputs["Geometry"], window_cutter.inputs["Mesh 2"])
 
-    if (type == 't'):
+    if (type == 'I' and type_detail == 'T1'):
         window_top = window_nodes(node_group, -900, window_type='top')
         node_group.links.new(window_top.outputs["Geometry"], window_cutter.inputs["Mesh 2"])
 
@@ -80,7 +82,6 @@ def elementti(type1):
     out_node = node_group.nodes.new(type="NodeGroupOutput")
     out_node.location.x = 3 * node_x_step
     node_group.links.new(originTransform.outputs["Geometry"], out_node.inputs["Geometry"])
-    
     
     
     return obj, width

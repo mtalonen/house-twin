@@ -3,6 +3,8 @@ import bpy
 import os
 import sys
 import importlib
+import yaml
+
 path = os.path.join(os.path.dirname(bpy.data.filepath), "./scripts")
 sys.path.append(path)
 
@@ -11,6 +13,13 @@ import elementti2
 importlib.reload(elementti2)
 
 from ontelolaatta import ontelolaatta
+
+
+wall_config_file = os.path.join(os.path.dirname(os.path.dirname(__file__)),  'scripts/walls.yaml')
+
+with open(wall_config_file, 'r') as file:
+    wall_config = yaml.safe_load(file)
+
 
 clean_scene()
 #ontelolaatta()
@@ -39,41 +48,41 @@ def linear_assembly(components, name):
 
 bpy.context.view_layer.objects.selected = []
 
-wall1, x1 = linear_assembly(
-    name="Wall1",
-    components=["t6", "x12", "t6", "x12", "x12", "t5", "x12", "m12", "m12", "x12", "m6", "m6", "x12","x2"]
-)
+x = 0
+y = 0
+angle = 0
 
-wall2, x2 = linear_assembly(
-    name="Wall2",
-    components=["t6", "x12", "x2"]
-)
-wall2.location = (x1, thickness, 0)
-wall2.rotation_euler = (0, 0, math.pi/2)
+for key in wall_config:
+    if wall_config[key][0] == 'UKT':
+        width = .2
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
+        angle = angle + math.pi/2
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
 
-wall3, x3 = linear_assembly(
-    name="Wall3",
-    components=["m12", "x12","x2"]
-)
-wall3.location = (x1,x2, 0)
+    elif wall_config[key][0] == 'SK':
+        width = .1
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
+        angle = angle - math.pi/2
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
 
-wall4, x4 = linear_assembly(
-    name="Wall4",
-    components=["m12", "t6", "x12", "x12", "x12", "t6", "m12", "x2"]
-)
-wall4.location = (x1 + x3, thickness + x2, 0)
-wall4.rotation_euler = (0, 0, math.pi/2)
+    elif wall_config[key][0] == 'DET_A2_2303':
+        width = .134
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
+        angle = angle - math.pi/4
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
 
-wall5, x5 = linear_assembly(
-    name="Wall5",
-    components=["t12", "x12",  "x12", "x12", "bm12", "x2"]
-)
-wall5.location = (x1 + x3 - thickness, thickness + x2 + x4, 0)
-wall5.rotation_euler = (0, 0, math.pi)
-
-wall6, x6 = linear_assembly(
-    name="Wall6",
-    components=["bm6", "x12", "x2"]
-)
-wall6.location = (x1 + x3 - thickness - x5, x2 + x4, 0)
-wall6.rotation_euler = (0, 0, -math.pi/2)
+    else:
+        obj, width = linear_assembly(
+            name=key,
+            components=wall_config[key]
+        )
+        obj.location = (x, y, 0)
+        obj.rotation_euler = (0, 0, angle)
+        x = x + width * math.cos(angle)
+        y = y + width * math.sin(angle)
