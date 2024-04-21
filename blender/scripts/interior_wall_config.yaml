@@ -1,0 +1,112 @@
+params:
+  length1: &length1 3.4
+  length2: &length2 12
+  door_width: &door_width 0.9
+  door_height: &door_height 2.1
+  ext_wall_thickness: &ext_wall_thickness 0.2
+
+  length_khh_mh_1: &length_khh_mh 2.2
+  width_khh_s: &width_khh_s 2.4
+  width_khh: &width_khh 3
+  width_khh_small: &width_khh_small 2.4
+  width_khh_mh_p2: &width_khh_mh_p2 1.2
+
+  width_mh1_large: &width_mh1_large 3
+  width_int_wall: &width_int_wall 0.1
+
+walls:
+  wall_th_mh:
+    length: *length1
+    y:
+      - *ext_wall_thickness
+      - *width_khh_s
+      - *width_khh
+      - *width_mh1_large
+
+  wall_khh_mh1:
+    length: *length_khh_mh
+    x: 0
+    y:
+      - *width_khh_s
+      - *width_khh
+
+  wall_mh1_door:
+    length: 1.2
+    x: *length_khh_mh
+    y:
+      - *width_khh_mh_p2
+      - *width_khh_s
+      - *width_khh_small
+    holes:
+      - width: *door_width
+        height: *door_height
+        x: 0.1
+
+  wall_khh_door:
+    length: 1.2
+    x: *length_khh_mh
+    y:
+      - *width_khh_s
+      - *width_khh_small
+
+    holes:
+      - width: *door_width
+        height: 2
+        x: .1
+
+  wall_khh_mh1_p2:
+    length: *width_khh_mh_p2
+    x:
+      - *length_khh_mh
+      - *width_int_wall
+    y:
+      - *width_khh_s
+      - *width_khh_small
+    angle: 90
+
+  wall_ph_khh:
+    length: *length1
+    y:
+      - *ext_wall_thickness
+      - *width_khh_s
+    holes:
+      - width: *door_width
+        height: *door_height
+        x: 2.3
+
+  wall_ph_s:
+    length: *width_khh_s
+    y: *ext_wall_thickness
+    x: 2
+    angle: 90
+    holes:
+      - width: *door_width
+        height: *door_height
+        x: 1.4
+
+  wall_oh_north:
+    length: *length2
+    height: 2.5
+    x:
+      - *length1
+      - 0.1
+    y: *ext_wall_thickness
+    angle: 90
+    holes:
+      - width: 1
+        height: 2.2
+        x:
+          - *length_khh_mh
+          - *width_int_wall
+          - *width_khh_small
+          - *width_int_wall
+
+      - width: 2
+        height: 2
+        x:
+          - *length_khh_mh
+          - *width_int_wall
+          - *width_khh
+          - *width_int_wall
+          - *width_mh1_large
+          - *width_int_wall
