@@ -14,6 +14,8 @@ params:
   width_mh1_large: &width_mh1_large 3
   width_int_wall: &width_int_wall 0.1
 
+  width_wc1: &width_wc1 1.3
+
 walls:
   wall_th_mh:
     length: *length1
@@ -110,3 +112,32 @@ walls:
           - *width_int_wall
           - *width_mh1_large
           - *width_int_wall
+
+  wall_oh_west:
+    length: 3.6
+    x:
+      - *length1
+      - *width_int_wall
+    y:
+      - *ext_wall_thickness
+      - *width_wc1
+
+  wall_wc1:
+    length: *width_wc1
+    x:
+      - *length1
+      - *width_int_wall
+      - 1.2
+    y:
+      - *ext_wall_thickness
+    angle: 90
+
+  wall_wc1_k:
+    length: *width_wc1
+    x:
+      - *length1
+      - *width_int_wall
+      - 3.6
+    y:
+      - *ext_wall_thickness
+    angle: 90
