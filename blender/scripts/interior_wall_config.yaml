@@ -141,3 +141,87 @@ walls:
     y:
       - *ext_wall_thickness
     angle: 90
+
+  wall_oh_south:
+    length: 3
+    x: 10.7
+    y: 5
+    angle: 90
+
+  wall_k1:
+    length: 3
+    x: 10
+    y: 5
+
+  wall_k2:
+    length: 2.4
+    x: 13
+    y: 0.2
+    angle: 90
+
+  wall_k3:
+    length: .6
+    x: 13
+    y: 4.4
+    angle: 90
+
+  wall_wc2a:
+    length: 1
+    x: 14
+    y: 2.3
+    angle: 90
+
+  wall_wc2b:
+    length: 1
+    x: 14
+    y: 3.3
+
+  wall_wc2c:
+    length: 1
+    x: 15
+    y: 2.3
+    angle: 90
+
+  wall_wc2d:
+    length: 1
+    x: 14
+    y: 2.3
+
+  wall_mh4_5:
+    length: 3
+    x: 17
+    y: 5.5
+
+  wall_mh4_5a:
+    length: 6
+    x: 17
+    y: 2.4
+    angle: 90
+
+  wall_mh4a:
+    length: 0.6
+    x: 16.9
+    y: 8.3
+
+  wall_mh4b:
+    length: 1.2
+    x: 17.5
+    y: 8.3
+    angle: 90
+
+  wall_mh3a:
+    length: 3.6
+    x: 13.3
+    y: 6.5
+
+  wall_mh3b:
+    length: 1.4
+    x: 13.7
+    y: 6.5
+    angle: 90
+
+  wall_mh2a:
+    length: 1.5
+    x: 13
+    y: 5.1
+    angle: 75

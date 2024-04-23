@@ -39,8 +39,9 @@ def get_value(var):
     return sum(var) if isinstance(var, list) else var
     
 
-def interior_wall(length, thickness=0.1, height=2.5, x=0, y=0, angle=0, holes=[]):
+def interior_wall(length, name='wall', thickness=0.1, height=2.5, x=0, y=0, angle=0, holes=[]):
     obj = cube(width=length, depth=thickness, height=height)
+    obj.name = name
 
     for hole_dimensions in holes:
         hole = cube(
@@ -76,6 +77,7 @@ def interior_wall_assembly():
     for wall_name in walls:
         wall = walls[wall_name]
         interior_wall(
+            name=wall_name,
             length=wall['length'],
             height=wall.get('height', 2.5),
             x=wall.get('x', 0),
