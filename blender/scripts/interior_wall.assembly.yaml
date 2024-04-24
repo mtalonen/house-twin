@@ -1,20 +1,17 @@
 params:
-  length1: &length1 3.4
-  length2: &length2 12
-  door_width: &door_width 0.9
-  door_height: &door_height 2.1
-  ext_wall_thickness: &ext_wall_thickness 0.2
-
-  length_khh_mh_1: &length_khh_mh 2.2
-  width_khh_s: &width_khh_s 2.4
-  width_khh: &width_khh 3
-  width_khh_small: &width_khh_small 2.4
-  width_khh_mh_p2: &width_khh_mh_p2 1.2
-
-  width_mh1_large: &width_mh1_large 3
-  width_int_wall: &width_int_wall 0.1
-
-  width_wc1: &width_wc1 1.3
+  - &door_width 0.9
+  - &length2 12
+  - &door_height 2.1
+  - &ext_wall_thickness 0.2
+  - &length_khh_mh 2.2
+  - &width_khh_s 2.4
+  - &width_khh 3
+  - &width_khh_small 2.4
+  - &width_khh_mh_p2 1.2
+  - &width_mh1_large 3
+  - &width_int_wall 0.1
+  - &width_wc1 1.3
+  - &length1 3.4
 
 walls:
   wall_th_mh:

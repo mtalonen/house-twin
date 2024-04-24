@@ -3,6 +3,8 @@ import os
 import yaml
 import math
 
+config_path = 'scripts/interior_wall.assembly.yaml'
+
 def cube(width, depth, height):
     vertices = [
         (0, 0, 0),             # 0
@@ -65,7 +67,7 @@ def interior_wall(length, name='wall', thickness=0.1, height=2.5, x=0, y=0, angl
     y_loc = get_value(y)
     obj.location = (x_loc, y_loc, 0)
 
-wall_config_file = os.path.join(os.path.dirname(os.path.dirname(__file__)),  'scripts/interior_wall_config.yaml')
+wall_config_file = os.path.join(os.path.dirname(os.path.dirname(__file__)),  config_path)
 
 with open(wall_config_file, 'r') as file:
     wall_config = yaml.safe_load(file)
