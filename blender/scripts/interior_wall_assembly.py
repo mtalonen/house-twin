@@ -46,11 +46,19 @@ def flatten(nested_list):
     return flat_list
 
 def get_value(var):
-    return sum(flatten(var)) if isinstance(var, list) else var
+    if isinstance(var, list):
+        return sum(flatten(var))
+    elif isinstance(var, dict):
+        if var["fn"] == "sum":
+            return sum(flatten(var["args"]))
+        if var["fn"] == "neg_sum":
+            return -sum(flatten(var["args"]))
+    else:
+        return var
     
 
 def interior_wall(length, name='wall', thickness=0.1, height=2.5, x=0, y=0, angle=0, holes=[]):
-    obj = cube(width=length, depth=thickness, height=height)
+    obj = cube(width=get_value(length), depth=thickness, height=height)
     obj.name = name
 
     for hole_dimensions in holes:
