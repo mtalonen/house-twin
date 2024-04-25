@@ -14,20 +14,19 @@ params:
   - &length1 3.4
 
 walls:
-  wall_th_mh:
-    length: *length1
-    y:
-      - *ext_wall_thickness
-      - *width_khh_s
-      - *width_khh
-      - *width_mh1_large
-
   wall_khh_mh1:
     length: *length_khh_mh
     x: 0
-    y:
+    y: &y_khh_mh1
       - *width_khh_s
       - *width_khh
+
+  wall_th_mh:
+    length: *length1
+    y:
+      - *y_khh_mh1
+      - *ext_wall_thickness
+      - *width_mh1_large
 
   wall_mh1_door:
     length: 1.2

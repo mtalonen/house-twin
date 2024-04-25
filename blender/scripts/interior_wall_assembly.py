@@ -36,9 +36,17 @@ def cube(width, depth, height):
 
     return cube
 
+def flatten(nested_list):
+    flat_list = []
+    for item in nested_list:
+        if isinstance(item, list):
+            flat_list.extend(flatten(item))
+        else:
+            flat_list.append(item)
+    return flat_list
 
 def get_value(var):
-    return sum(var) if isinstance(var, list) else var
+    return sum(flatten(var)) if isinstance(var, list) else var
     
 
 def interior_wall(length, name='wall', thickness=0.1, height=2.5, x=0, y=0, angle=0, holes=[]):
