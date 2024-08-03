@@ -3,105 +3,8 @@ import os
 import yaml
 import math
 
-
-def cuboid(width, depth, height):
-    vertices = [
-        (0, 0, 0),             # 0
-        (0, 0, height),        # 1
-        (0, depth, 0),         # 2
-        (0, depth, height),    # 3
-        (width, 0, 0),         # 4
-        (width, 0, height),    # 5
-        (width, depth, 0),     # 6
-        (width, depth, height)  # 7
-    ]
-
-    faces = [
-        (0, 1, 3, 2),  # left
-        (0, 1, 5, 4),  # front
-        (4, 5, 7, 6),  # right
-        (2, 3, 7, 6),  # back
-        (0, 2, 6, 4),  # bottom
-        (1, 3, 7, 5),  # top
-    ]
-
-    mesh = bpy.data.meshes.new(name="Cube")
-    mesh.from_pydata(vertices, [], faces)
-    mesh.update()
-    cube = bpy.data.objects.new("Cube", mesh)
-    return cube
-
-
-def cuboid_with_holes(length, name, thickness, height, holes=[]):
-    obj = cuboid(width=get_value(length), depth=thickness, height=height)
-    obj.name = name
-
-    for hole_dimensions in holes:
-        hole = cuboid(
-            width=hole_dimensions['width'],
-            depth=3*thickness,
-            height=hole_dimensions['height']
-        )
-
-        x_loc = get_value(hole_dimensions.get('x', 0))
-
-        hole.location = (x_loc, -thickness, -0.1)
-        hole.parent = obj
-        hole.hide_viewport = True
-        boolean_modifier = obj.modifiers.new(name="boolean", type="BOOLEAN")
-        boolean_modifier.object = hole
-        boolean_modifier.operation = "DIFFERENCE"
-        boolean_modifier.solver = "FAST"
-
-    return obj
-
-
-def group(name):
-    obj = bpy.data.objects.new("empty", None)
-    obj.name = name
-    return obj
-
-
-def flatten(nested_list):
-    flat_list = []
-    for item in nested_list:
-        if isinstance(item, list):
-            flat_list.extend(flatten(item))
-        else:
-            flat_list.append(item)
-    return flat_list
-
-
-def get_value(var):
-    if isinstance(var, list):
-        return sum(flatten(var))
-    elif isinstance(var, dict):
-        if var["fn"] == "sum":
-            return sum(flatten(var["args"]))
-        if var["fn"] == "neg_sum":
-            return -sum(flatten(var["args"]))
-    else:
-        return var
-
-
-def door_01(name):
-    obj = cuboid(
-        width=.9,
-        depth=.05,
-        height=2
-    )
-    obj.name = name
-    return obj
-
-
-def basement_wall(length, name='b_wall', thickness=0.3, height=2.7, holes=[]):
-    obj = cuboid_with_holes(length, name, thickness, height, holes)
-    return obj
-
-
-def interior_wall(length, name='wall', thickness=0.1, height=2.5, holes=[]):
-    obj = cuboid_with_holes(length, name, thickness, height, holes)
-    return obj
+import component_lib
+from utils import get_value
 
 
 def component_assembly(components, parent=None):
@@ -111,7 +14,7 @@ def component_assembly(components, parent=None):
 
         component_type = component['type'] if 'type' in component else 'group'
 
-        fn = globals()[component_type]
+        fn = getattr(component_lib, component_type)
         obj = fn(**args)
 
         if (parent):

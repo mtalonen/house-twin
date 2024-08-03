@@ -333,4 +333,57 @@ walls:
           y: 5.1
         rotation:
           angle: 75
-        angle: 75
+  - name: basement
+    location:
+      z: -3
+    components:
+      - type: basement_wall
+        name: b_west
+        length: 10
+      - type: basement_wall
+        name: b_north
+        length: 8
+        rotation:
+          angle: 90
+      - type: basement_wall
+        name: b_east
+        length: 10
+        location:
+          y: 8
+
+  - name: basement_floor
+    location:
+      z: -3.3
+    components:
+      - type: floor_casting
+        name: basement_floor_casting
+        length: &b_floor_x
+          - 12
+        width: 8
+        height: .1
+        location:
+          y: 1
+      - type: floor_casting
+        name: basement_floor_casting_1
+        length: *b_floor_x
+        width: 1
+        height: .2
+
+      - type: floor_casting
+        name: basement_floor_casting_2
+        length: 5
+        width: 9
+        height: .2
+        location:
+          x: *b_floor_x
+
+  - name: hvac
+    location:
+      z: 4
+    components:
+      - type: hvac_duct
+        length: 10
+      - type: hvac_duct
+        length: 10
+        location:
+          y: 3
