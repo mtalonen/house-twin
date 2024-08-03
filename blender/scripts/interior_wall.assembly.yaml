@@ -79,7 +79,8 @@ walls:
           y:
             - *width_khh_s
             - *width_khh_small
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_ph_khh
@@ -99,7 +100,8 @@ walls:
         location:
           y: *ext_wall_thickness
           x: 2
-        angle: 90
+        rotation:
+          angle: 90
         holes:
           - width: *door_width_09
             height: *door_height
@@ -115,7 +117,8 @@ walls:
             - *length_wall_1
             - 0.1
           y: *ext_wall_thickness
-        angle: 90
+        rotation:
+          angle: 90
         holes:
           - width: 1
             height: *door_height
@@ -164,7 +167,8 @@ walls:
             - 1.47
           y:
             - *ext_wall_thickness
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_wc1_k
@@ -176,7 +180,8 @@ walls:
             - *length_oh_wc_x
           y:
             - *ext_wall_thickness
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_oh_south
@@ -186,7 +191,8 @@ walls:
             - *oh_north_x
             - 6.858
           y: 5
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_k1
@@ -201,7 +207,8 @@ walls:
         location:
           x: 13
           y: 0.2
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_k3
@@ -209,7 +216,8 @@ walls:
         location:
           x: 13
           y: 4.4
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_wc2a
@@ -217,7 +225,8 @@ walls:
         location:
           x: 14
           y: 2.3
-        angle: 90
+        rotation:
+          angle: 90
         holes:
           - width: *door_width_08
             height: *door_height
@@ -236,7 +245,8 @@ walls:
         location:
           x: 15
           y: 2.3
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_wc2d
@@ -258,7 +268,8 @@ walls:
         location:
           x: 17
           y: 2.4
-        angle: 90
+        rotation:
+          angle: 90
         holes:
           - width: *door_width_09
             height: *door_height
@@ -291,7 +302,8 @@ walls:
         location:
           x: 17.5
           y: 8.3
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_mh3a
@@ -310,7 +322,8 @@ walls:
         location:
           x: 13.7
           y: 6.5
-        angle: 90
+        rotation:
+          angle: 90
 
       - type: interior_wall
         name: wall_mh2a
@@ -318,4 +331,6 @@ walls:
         location:
           x: 13
           y: 5.1
+        rotation:
+          angle: 75
         angle: 75

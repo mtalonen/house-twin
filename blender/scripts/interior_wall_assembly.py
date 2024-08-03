@@ -4,7 +4,7 @@ import yaml
 import math
 
 
-def cube(width, depth, height):
+def cuboid(width, depth, height):
     vertices = [
         (0, 0, 0),             # 0
         (0, 0, height),        # 1
@@ -32,6 +32,36 @@ def cube(width, depth, height):
     return cube
 
 
+def cuboid_with_holes(length, name, thickness, height, holes=[]):
+    obj = cuboid(width=get_value(length), depth=thickness, height=height)
+    obj.name = name
+
+    for hole_dimensions in holes:
+        hole = cuboid(
+            width=hole_dimensions['width'],
+            depth=3*thickness,
+            height=hole_dimensions['height']
+        )
+
+        x_loc = get_value(hole_dimensions.get('x', 0))
+
+        hole.location = (x_loc, -thickness, -0.1)
+        hole.parent = obj
+        hole.hide_viewport = True
+        boolean_modifier = obj.modifiers.new(name="boolean", type="BOOLEAN")
+        boolean_modifier.object = hole
+        boolean_modifier.operation = "DIFFERENCE"
+        boolean_modifier.solver = "FAST"
+
+    return obj
+
+
+def group(name):
+    obj = bpy.data.objects.new("empty", None)
+    obj.name = name
+    return obj
+
+
 def flatten(nested_list):
     flat_list = []
     for item in nested_list:
@@ -55,7 +85,7 @@ def get_value(var):
 
 
 def door_01(name):
-    obj = cube(
+    obj = cuboid(
         width=.9,
         depth=.05,
         height=2
@@ -64,41 +94,20 @@ def door_01(name):
     return obj
 
 
-def group(name):
-    obj = bpy.data.objects.new("empty", None)
-    obj.name = name
+def basement_wall(length, name='b_wall', thickness=0.3, height=2.7, holes=[]):
+    obj = cuboid_with_holes(length, name, thickness, height, holes)
     return obj
 
 
-def interior_wall(length, name='wall', thickness=0.1, height=2.5, angle=0, holes=[]):
-    obj = cube(width=get_value(length), depth=thickness, height=height)
-    obj.name = name
-
-    for hole_dimensions in holes:
-        hole = cube(
-            width=hole_dimensions['width'],
-            depth=3*thickness,
-            height=hole_dimensions['height']
-        )
-
-        x_loc = get_value(hole_dimensions.get('x', 0))
-
-        hole.location = (x_loc, -thickness, -0.1)
-        hole.parent = obj
-        hole.hide_viewport = True
-        boolean_modifier = obj.modifiers.new(name="boolean", type="BOOLEAN")
-        boolean_modifier.object = hole
-        boolean_modifier.operation = "DIFFERENCE"
-        boolean_modifier.solver = "FAST"
-
-    obj.rotation_euler = (0, 0, angle/180 * math.pi)
+def interior_wall(length, name='wall', thickness=0.1, height=2.5, holes=[]):
+    obj = cuboid_with_holes(length, name, thickness, height, holes)
     return obj
 
 
 def component_assembly(components, parent=None):
     for component in components:
         args = {k: v for k, v in component.items() if k !=
-                "type" and k != "components" and k != 'location'}
+                "type" and k != "components" and k != 'location' and k != 'rotation'}
 
         component_type = component['type'] if 'type' in component else 'group'
 
@@ -110,6 +119,10 @@ def component_assembly(components, parent=None):
 
         scene = bpy.context.scene
         scene.collection.objects.link(obj)
+
+        if ('rotation' in component):
+            obj.rotation_euler = (0, 0, get_value(
+                component['rotation'].get('angle', 0))/180 * math.pi)
 
         if ('location' in component):
             obj.location = (get_value(component['location'].get(
