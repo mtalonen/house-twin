@@ -3,8 +3,6 @@ import os
 import yaml
 import math
 
-config_path = 'scripts/interior_wall.assembly.yaml'
-
 
 def cube(width, depth, height):
     vertices = [
@@ -97,13 +95,6 @@ def interior_wall(length, name='wall', thickness=0.1, height=2.5, angle=0, holes
     return obj
 
 
-wall_config_file = os.path.join(os.path.dirname(
-    os.path.dirname(__file__)),  config_path)
-
-with open(wall_config_file, 'r') as file:
-    wall_config = yaml.safe_load(file)
-
-
 def component_assembly(components, parent=None):
     for component in components:
         args = {k: v for k, v in component.items() if k !=
@@ -128,6 +119,13 @@ def component_assembly(components, parent=None):
             component_assembly(component['components'], obj)
 
 
-def interior_wall_assembly():
+def interior_wall_assembly(config_path):
+
+    wall_config_file = os.path.join(os.path.dirname(
+        os.path.dirname(__file__)),  config_path)
+
+    with open(wall_config_file, 'r') as file:
+        wall_config = yaml.safe_load(file)
+
     walls = wall_config['walls']
     component_assembly(walls)
