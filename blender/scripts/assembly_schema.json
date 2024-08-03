@@ -12,7 +12,7 @@
       }
     },
     "walls": {
-      "type": "object",
+      "type": "array",
       "properties": {
         "additionalProperties": true
       }

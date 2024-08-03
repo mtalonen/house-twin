@@ -1,7 +1,10 @@
+# yaml-language-server: $schema=assembly_schema.json
+
 params:
-  - &door_width 0.9
-  - &length2 12
   - &door_height 2.1
+  - &door_width_09 0.9
+  - &door_width_08 0.8
+  - &length2 12
   - &ext_wall_thickness 0.2
   - &length_khh_mh_x 2.517
   - &width_khh_s 2.4
@@ -14,215 +17,305 @@ params:
   - &length_wall_1 3.548
 
 walls:
-  wall_khh_mh1:
-    length: *length_khh_mh_x
-    x: 0
-    y: &y_khh_mh1
-      - *width_khh_s
-      - *width_khh
+  - name: interior_walls
+    location:
+      z: 0
+    components:
+      - type: interior_wall
+        name: wall_khh_mh1
+        length: *length_khh_mh_x
+        location:
+          x: 0
+          y: &y_khh_mh1
+            - *width_khh_s
+            - *width_khh
 
-  wall_th_mh:
-    length: *length_wall_1
-    y:
-      - *y_khh_mh1
-      - *ext_wall_thickness
-      - *width_mh1_large
+      - type: interior_wall
+        name: wall_mh1_th
+        length: *length_wall_1
+        location:
+          y:
+            - *y_khh_mh1
+            - *ext_wall_thickness
+            - *width_mh1_large
 
-  wall_mh1_door:
-    length:
-      - 1.2
-    x: *length_khh_mh_x
-    y:
-      - *width_khh_mh_p2
-      - *width_khh_s
-      - *width_khh_small
-    holes:
-      - width: *door_width
-        height: *door_height
-        x: 0.1
+      - type: interior_wall
+        name: wall_mh1_door
+        length:
+          - 1.2
+        location:
+          x: *length_khh_mh_x
+          y:
+            - *width_khh_mh_p2
+            - *width_khh_s
+            - *width_khh_small
+        holes:
+          - width: *door_width_09
+            height: *door_height
+            x: 0.1
 
-  wall_khh_door:
-    length: 1.2
-    x: *length_khh_mh_x
-    y:
-      fn: sum
-      args:
-        - *width_khh_s
-        - *width_khh_small
+      - type: interior_wall
+        name: wall_khh_door
+        length: 1.2
+        location:
+          x: *length_khh_mh_x
+          y:
+            fn: sum
+            args:
+              - *width_khh_s
+              - *width_khh_small
+        holes:
+          - width: *door_width_09
+            height: 2
+            x: .1
 
-    holes:
-      - width: *door_width
-        height: 2
-        x: .1
+      - type: interior_wall
+        name: wall_khh_mh1_p2
+        length: *width_khh_mh_p2
+        location:
+          x:
+            - *length_khh_mh_x
+            - *width_int_wall
+          y:
+            - *width_khh_s
+            - *width_khh_small
+        angle: 90
 
-  wall_khh_mh1_p2:
-    length: *width_khh_mh_p2
-    x:
-      - *length_khh_mh_x
-      - *width_int_wall
-    y:
-      - *width_khh_s
-      - *width_khh_small
-    angle: 90
+      - type: interior_wall
+        name: wall_ph_khh
+        length: *length_wall_1
+        location:
+          y:
+            - *ext_wall_thickness
+            - *width_khh_s
+        holes:
+          - width: *door_width_09
+            height: *door_height
+            x: 2.3
 
-  wall_ph_khh:
-    length: *length_wall_1
-    y:
-      - *ext_wall_thickness
-      - *width_khh_s
-    holes:
-      - width: *door_width
-        height: *door_height
-        x: 2.3
+      - type: interior_wall
+        name: wall_ph_s
+        length: *width_khh_s
+        location:
+          y: *ext_wall_thickness
+          x: 2
+        angle: 90
+        holes:
+          - width: *door_width_09
+            height: *door_height
+            x: 1.4
 
-  wall_ph_s:
-    length: *width_khh_s
-    y: *ext_wall_thickness
-    x: 2
-    angle: 90
-    holes:
-      - width: *door_width
-        height: *door_height
-        x: 1.4
+      # North wall of the living room
+      - type: interior_wall
+        name: wall_oh_north
+        length: *length2
+        height: 2.5
+        location:
+          x: &oh_north_x
+            - *length_wall_1
+            - 0.1
+          y: *ext_wall_thickness
+        angle: 90
+        holes:
+          - width: 1
+            height: *door_height
+            x:
+              - *length_khh_mh_x
+              - *width_int_wall
+              - *width_khh_small
+              - *width_int_wall
 
-  wall_oh_north:
-    length: *length2
-    height: 2.5
-    x: &oh_north_x
-      - *length_wall_1
-      - 0.1
-    y: *ext_wall_thickness
-    angle: 90
-    holes:
-      - width: 1
-        height: 2.2
-        x:
-          - *length_khh_mh_x
-          - *width_int_wall
-          - *width_khh_small
-          - *width_int_wall
+          - width: 2
+            height: 2
+            x:
+              - *length_khh_mh_x
+              - *width_int_wall
+              - *width_khh
+              - *width_int_wall
+              - *width_mh1_large
+              - *width_int_wall
 
-      - width: 2
-        height: 2
-        x:
-          - *length_khh_mh_x
-          - *width_int_wall
-          - *width_khh
-          - *width_int_wall
-          - *width_mh1_large
-          - *width_int_wall
+      # Living room wall between wc and "tuulikaappi :)"
+      - type: interior_wall
+        name: wall_oh_west
+        length: &length_oh_wc_x 3.14
+        location:
+          x:
+            - *length_wall_1
+            - *width_int_wall
+          y:
+            - *ext_wall_thickness
+            - *width_wc1
+        holes:
+          - width: *door_width_09
+            height: *door_height
+            x: .1
+          - width: *door_width_09
+            height: *door_height
+            x: 1.5
 
-  wall_oh_west:
-    length: &length_oh_wc_x 3.14
-    x:
-      - *length_wall_1
-      - *width_int_wall
-    y:
-      - *ext_wall_thickness
-      - *width_wc1
+      - type: interior_wall
+        name: wall_wc1_tk
+        length: *width_wc1
+        location:
+          x:
+            - *length_wall_1
+            - *width_int_wall
+            - 1.47
+          y:
+            - *ext_wall_thickness
+        angle: 90
 
-  wall_wc1:
-    length: *width_wc1
-    x:
-      - *length_wall_1
-      - *width_int_wall
-      - 1.47
-    y:
-      - *ext_wall_thickness
-    angle: 90
+      - type: interior_wall
+        name: wall_wc1_k
+        length: *width_wc1
+        location:
+          x:
+            - *length_wall_1
+            - *width_int_wall
+            - *length_oh_wc_x
+          y:
+            - *ext_wall_thickness
+        angle: 90
 
-  wall_wc1_k:
-    length: *width_wc1
-    x:
-      - *length_wall_1
-      - *width_int_wall
-      - *length_oh_wc_x
-    y:
-      - *ext_wall_thickness
-    angle: 90
+      - type: interior_wall
+        name: wall_oh_south
+        length: 3
+        location:
+          x:
+            - *oh_north_x
+            - 6.858
+          y: 5
+        angle: 90
 
-  wall_oh_south:
-    length: 3
-    x:
-      - *oh_north_x
-      - 6.858
-    y: 5
-    angle: 90
+      - type: interior_wall
+        name: wall_k1
+        length: 3
+        location:
+          x: 10
+          y: 5
 
-  wall_k1:
-    length: 3
-    x: 10
-    y: 5
+      - type: interior_wall
+        name: wall_k2
+        length: 2.4
+        location:
+          x: 13
+          y: 0.2
+        angle: 90
 
-  wall_k2:
-    length: 2.4
-    x: 13
-    y: 0.2
-    angle: 90
+      - type: interior_wall
+        name: wall_k3
+        length: .6
+        location:
+          x: 13
+          y: 4.4
+        angle: 90
 
-  wall_k3:
-    length: .6
-    x: 13
-    y: 4.4
-    angle: 90
+      - type: interior_wall
+        name: wall_wc2a
+        length: 1
+        location:
+          x: 14
+          y: 2.3
+        angle: 90
+        holes:
+          - width: *door_width_08
+            height: *door_height
+            x: .1
 
-  wall_wc2a:
-    length: 1
-    x: 14
-    y: 2.3
-    angle: 90
+      - type: interior_wall
+        name: wall_wc2b
+        length: 1
+        location:
+          x: 14
+          y: 3.3
 
-  wall_wc2b:
-    length: 1
-    x: 14
-    y: 3.3
+      - type: interior_wall
+        name: wall_wc2c
+        length: 1
+        location:
+          x: 15
+          y: 2.3
+        angle: 90
 
-  wall_wc2c:
-    length: 1
-    x: 15
-    y: 2.3
-    angle: 90
+      - type: interior_wall
+        name: wall_wc2d
+        length: 1
+        location:
+          x: 14
+          y: 2.3
 
-  wall_wc2d:
-    length: 1
-    x: 14
-    y: 2.3
+      - type: interior_wall
+        name: wall_mh4_5
+        length: 3
+        location:
+          x: 17
+          y: 5.5
 
-  wall_mh4_5:
-    length: 3
-    x: 17
-    y: 5.5
+      - type: interior_wall
+        name: wall_mh4_5a
+        length: 6
+        location:
+          x: 17
+          y: 2.4
+        angle: 90
+        holes:
+          - width: *door_width_09
+            height: *door_height
+            x: &aa
+              - 2
+          - width: *door_width_09
+            height: *door_height
+            x: &ab
+              - 3
+        components:
+          - name: AAA
+            type: door_01
+            location:
+              x: *aa
+          - name: BBB
+            type: door_01
+            location:
+              x: *ab
 
-  wall_mh4_5a:
-    length: 6
-    x: 17
-    y: 2.4
-    angle: 90
+      - type: interior_wall
+        name: wall_mh4a
+        length: 0.6
+        location:
+          x: 16.9
+          y: 8.3
 
-  wall_mh4a:
-    length: 0.6
-    x: 16.9
-    y: 8.3
+      - type: interior_wall
+        name: wall_mh4b
+        length: 1.2
+        location:
+          x: 17.5
+          y: 8.3
+        angle: 90
 
-  wall_mh4b:
-    length: 1.2
-    x: 17.5
-    y: 8.3
-    angle: 90
+      - type: interior_wall
+        name: wall_mh3a
+        length: 3.6
+        location:
+          x: 13.3
+          y: 6.5
+        holes:
+          - width: *door_width_09
+            height: *door_height
+            x: 2
 
-  wall_mh3a:
-    length: 3.6
-    x: 13.3
-    y: 6.5
+      - type: interior_wall
+        name: wall_mh3b
+        length: 1.4
+        location:
+          x: 13.7
+          y: 6.5
+        angle: 90
 
-  wall_mh3b:
-    length: 1.4
-    x: 13.7
-    y: 6.5
-    angle: 90
-
-  wall_mh2a:
-    length: 1.5
-    x: 13
-    y: 5.1
-    angle: 75
+      - type: interior_wall
+        name: wall_mh2a
+        length: 1.5
+        location:
+          x: 13
+          y: 5.1
+        angle: 75
