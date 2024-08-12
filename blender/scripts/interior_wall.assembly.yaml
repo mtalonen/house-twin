@@ -378,7 +378,8 @@ walls:
   - name: hvac
     type: hvac
     location:
-      y: -10
+      x: 8
+      y: 4
       z: 4
     network:
       type: hvac_duct
@@ -387,20 +388,29 @@ walls:
       out:
         type: hvac_duct_90
         diameter: 0.16
-        rotation: 20
         out:
           type: hvac_duct
           diameter: 0.16
           length: 1
-          rotation: 90
           out:
             type: hvac_duct_t
             diameter: 0.16
             out1:
-              type: hvac_duct_90
+              type: hvac_duct
               diameter: 0.16
-              rotation: -90
+              length: 4
+              out:
+                type: hvac_duct_90
+                diameter: 0.16
+                rotation: -90
             out2:
-              type: hvac_duct_90
+              type: hvac_duct
               diameter: 0.16
-              rotation: -90
+              length: 4
+              out:
+                type: hvac_duct_t2
+                diameter: 0.16
+                out2:
+                  type: hvac_duct_90
+                  rotation: -90
+                  diameter: 0.16

@@ -177,6 +177,31 @@ def hvac_duct_t(diameter):
     return obj1
 
 
+def hvac_duct_t2(diameter):
+    length = 0.3
+    radius = diameter/2
+
+    obj1 = pipe(1 * length, diameter=diameter)
+    obj2 = pipe(2 * length, diameter=diameter)
+
+    mesh1 = obj1.data
+    mesh2 = obj2.data
+
+    bm1 = bmesh.new()
+    bm1.from_mesh(mesh1)
+
+    bmesh.ops.rotate(bm1, verts=bm1.verts, cent=(0, 0, 0),
+                     matrix=mathutils.Matrix.Rotation(math.radians(90), 4, 'Z'))
+    bmesh.ops.translate(bm1, verts=bm1.verts, vec=(length, 0, 0))
+
+    bm1.from_mesh(mesh2)
+    bm1.to_mesh(mesh1)
+    mesh1.update()
+    bm1.free()
+
+    return obj1
+
+
 def interior_wall(length, name='wall', thickness=0.1, height=2.5, holes=[]):
     obj = cuboid_with_holes(length, name, thickness, height, holes)
     return obj
