@@ -1,4 +1,7 @@
 import bpy
+import bmesh
+import math
+import mathutils
 
 from utils import get_value
 
@@ -87,9 +90,91 @@ def floor_casting(length, width, height, name='floor_casting'):
     return obj
 
 
-def hvac_duct(length):
-    obj = cuboid(width=length, depth=0.1, height=0.1)
+def pipe(length, diameter):
+    mesh = bpy.data.meshes.new(name="CylinderMesh")
+    obj = bpy.data.objects.new(name="Pipe", object_data=mesh)
+
+    bm = bmesh.new()
+    bmesh.ops.create_circle(
+        bm,
+        cap_ends=False,
+        radius=diameter/2,
+        segments=16
+    )
+
+    rotation_matrix = mathutils.Matrix.Rotation(math.radians(90), 4, 'Y')
+
+    for vert in bm.verts:
+        vert.co = rotation_matrix @ vert.co
+
+    extrude_result = bmesh.ops.extrude_edge_only(bm, edges=bm.edges)
+
+    bmesh.ops.translate(
+        bm,
+        vec=(length, 0, 0),
+        verts=[v for v in extrude_result['geom']
+               if isinstance(v, bmesh.types.BMVert)]
+    )
+
+    bm.to_mesh(mesh)
+    bm.free()
     return obj
+
+
+def hvac_duct(length, diameter):
+    obj = pipe(length, diameter=diameter)
+    return obj
+
+
+def hvac_duct_90(diameter):
+
+    length = 0.3
+    radius = diameter/2
+
+    obj1 = pipe(length + radius, diameter=diameter)
+    obj2 = pipe(length + radius, diameter=diameter)
+
+    mesh1 = obj1.data
+    mesh2 = obj2.data
+
+    bm1 = bmesh.new()
+    bm1.from_mesh(mesh1)
+
+    bmesh.ops.rotate(bm1, verts=bm1.verts, cent=(0, 0, 0),
+                     matrix=mathutils.Matrix.Rotation(math.radians(90), 4, 'Z'))
+    bmesh.ops.translate(bm1, verts=bm1.verts, vec=(length, -radius, 0))
+
+    bm1.from_mesh(mesh2)
+    bm1.to_mesh(mesh1)
+    mesh1.update()
+    bm1.free()
+
+    return obj1
+
+
+def hvac_duct_t(diameter):
+    length = 0.3
+    radius = diameter/2
+
+    obj1 = pipe(2 * length, diameter=diameter)
+    obj2 = pipe(length, diameter=diameter)
+
+    mesh1 = obj1.data
+    mesh2 = obj2.data
+
+    bm1 = bmesh.new()
+    bm1.from_mesh(mesh1)
+
+    bmesh.ops.rotate(bm1, verts=bm1.verts, cent=(0, 0, 0),
+                     matrix=mathutils.Matrix.Rotation(math.radians(90), 4, 'Z'))
+    bmesh.ops.translate(bm1, verts=bm1.verts, vec=(length, -length, 0))
+
+    bm1.from_mesh(mesh2)
+    bm1.to_mesh(mesh1)
+    mesh1.update()
+    bm1.free()
+
+    return obj1
 
 
 def interior_wall(length, name='wall', thickness=0.1, height=2.5, holes=[]):

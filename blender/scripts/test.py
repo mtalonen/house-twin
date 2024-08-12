@@ -1,19 +1,14 @@
-
-import component_lib
 import wall_element_assembly
 import interior_wall_assembly
+import component_lib
+import map_network
 from clean_scene import clean_scene
-import bpy
-import os
-import sys
 import importlib
 
-path = os.path.join(os.path.dirname(bpy.data.filepath), "./scripts")
-sys.path.append(path)
-
+importlib.reload(component_lib)
 importlib.reload(wall_element_assembly)
 importlib.reload(interior_wall_assembly)
-importlib.reload(component_lib)
+importlib.reload(map_network)
 
 
 clean_scene()

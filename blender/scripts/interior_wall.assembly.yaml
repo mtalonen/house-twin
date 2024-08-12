@@ -350,7 +350,6 @@ walls:
         length: 10
         location:
           y: 8
-
   - name: basement_floor
     location:
       z: -3.3
@@ -376,14 +375,32 @@ walls:
         height: .2
         location:
           x: *b_floor_x
-
   - name: hvac
+    type: hvac
     location:
+      y: -10
       z: 4
-    components:
-      - type: hvac_duct
-        length: 10
-      - type: hvac_duct
-        length: 10
-        location:
-          y: 3
+    network:
+      type: hvac_duct
+      diameter: 0.16
+      length: 1
+      out:
+        type: hvac_duct_90
+        diameter: 0.16
+        rotation: 20
+        out:
+          type: hvac_duct
+          diameter: 0.16
+          length: 1
+          rotation: 90
+          out:
+            type: hvac_duct_t
+            diameter: 0.16
+            out1:
+              type: hvac_duct_90
+              diameter: 0.16
+              rotation: -90
+            out2:
+              type: hvac_duct_90
+              diameter: 0.16
+              rotation: -90

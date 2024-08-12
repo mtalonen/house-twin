@@ -5,14 +5,31 @@ import math
 
 import component_lib
 from utils import get_value
+from map_network import map_network
+
+import json
 
 
 def component_assembly(components, parent=None):
     for component in components:
+        component_type = component['type'] if 'type' in component else 'group'
+
+        if component_type == 'hvac':
+            a = map_network(component['network'])
+
+            # print(json.dumps(a, indent=2, sort_keys=True))
+
+            node = {
+                "name": 'hvac',
+                "location": component['location'],
+                "components": a
+            }
+
+            component_assembly([node])
+            continue
+
         args = {k: v for k, v in component.items() if k !=
                 "type" and k != "components" and k != 'location' and k != 'rotation'}
-
-        component_type = component['type'] if 'type' in component else 'group'
 
         fn = getattr(component_lib, component_type)
         obj = fn(**args)
@@ -24,8 +41,10 @@ def component_assembly(components, parent=None):
         scene.collection.objects.link(obj)
 
         if ('rotation' in component):
-            obj.rotation_euler = (0, 0, get_value(
-                component['rotation'].get('angle', 0))/180 * math.pi)
+            x = math.radians(get_value(component['rotation'].get('x', 0)))
+            y = math.radians(get_value(component['rotation'].get('y', 0)))
+            z = math.radians(get_value(component['rotation'].get('angle', 0)))
+            obj.rotation_euler = (x, y, z)
 
         if ('location' in component):
             obj.location = (get_value(component['location'].get(
