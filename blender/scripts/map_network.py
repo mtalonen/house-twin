@@ -1,3 +1,6 @@
+import math
+
+
 def map_network(node):
     out = {}
     if 'type' in node:
@@ -80,6 +83,24 @@ def map_network(node):
                     },
                     "rotation": {
                         "angle": 90
+                    }
+                }
+                if 'rotation' in node['out']:
+                    child["rotation"]['x'] = node['out']["rotation"]
+
+                child['components'] = map_network(node["out"])
+                out["components"] = [child]
+
+        if node['type'] == 'hvac_duct_45':
+            if "out" in node:
+                child = {
+                    "name": "out",
+                    "location": {
+                        "x": (0.3 + 0.3 / math.sqrt(2)),
+                        "y": (0.3 / math.sqrt(2))
+                    },
+                    "rotation": {
+                        "angle": 45
                     }
                 }
                 if 'rotation' in node['out']:

@@ -411,6 +411,9 @@ walls:
                 type: hvac_duct_t2
                 diameter: 0.16
                 out2:
-                  type: hvac_duct_90
-                  rotation: -90
+                  type: hvac_duct_45
                   diameter: 0.16
+                  out:
+                    type: hvac_duct
+                    diameter: 0.16
+                    length: 1
