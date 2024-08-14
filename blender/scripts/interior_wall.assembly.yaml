@@ -398,11 +398,60 @@ walls:
             out1:
               type: hvac_duct
               diameter: 0.16
-              length: 4
+              length: 5.5
               out:
-                type: hvac_duct_90
+                type: hvac_duct_t2
                 diameter: 0.16
-                rotation: -90
+                rotation: 180
+                out1:
+                  type: hvac_duct
+                  diameter: 0.16
+                  length: 1
+                  out:
+                    type: hvac_duct_t2
+                    diameter: 0.16
+                    rotation: 180
+                    out1:
+                      type: hvac_duct
+                      diameter: 0.16
+                      length: 1
+                      out:
+                        type: hvac_duct_90
+                        diameter: 0.16
+                        rotation: -90
+                    out2:
+                      type: hvac_duct
+                      diameter: 0.16
+                      length: 3
+                      out:
+                        type: hvac_duct_90
+                        diameter: 0.16
+                        out:
+                          type: hvac_duct
+                          diameter: 0.16
+                          length: 2
+                          out:
+                            type: hvac_duct_90
+                            rotation: -90
+                            diameter: 0.16
+                out2:
+                  type: hvac_duct
+                  diameter: 0.16
+                  length: 2
+                  out:
+                    type: hvac_duct_90
+                    diameter: 0.16
+                    rotation: 180
+                    out:
+                      type: hvac_duct
+                      diameter: 0.16
+                      length: 4
+                      out:
+                        type: hvac_duct_90
+                        name: sauna
+                        diameter: 0.16
+                        rotation: -90
+
             out2:
               type: hvac_duct
               diameter: 0.16
@@ -410,10 +459,62 @@ walls:
               out:
                 type: hvac_duct_t2
                 diameter: 0.16
-                out2:
-                  type: hvac_duct_45
+                out1:
+                  type: hvac_duct
                   diameter: 0.16
+                  length: .2
                   out:
-                    type: hvac_duct
+                    type: hvac_duct_45
                     diameter: 0.16
-                    length: 1
+                    out:
+                      type: hvac_duct
+                      diameter: 0.16
+                      length: 1
+                      out:
+                        type: hvac_duct_90
+                        diameter: 0.16
+                        rotation: -90
+                out2:
+                  type: hvac_duct
+                  diameter: 0.16
+                  length: 2
+                  out:
+                    type: hvac_duct_t2
+                    diameter: 0.16
+                    out1:
+                      type: hvac_duct
+                      diameter: 0.16
+                      length: .2
+                      out:
+                        type: hvac_duct_t2
+                        diameter: 0.16
+                        rotation: 180
+                        out1:
+                          type: hvac_duct
+                          diameter: 0.16
+                          length: .2
+                          out:
+                            type: hvac_duct_90
+                            diameter: 0.16
+                            rotation: 90
+                        out2:
+                          type: hvac_duct
+                          diameter: 0.16
+                          length: .2
+                          out:
+                            type: hvac_duct_90
+                            diameter: 0.16
+                            rotation: 90
+
+                    out2:
+                      type: hvac_duct
+                      diameter: 0.16
+                      length: .2
+                      out:
+                        type: hvac_duct_90
+                        diameter: 0.16
+                        rotation: 180
+                        out:
+                          type: hvac_duct_90
+                          diameter: 0.16
+                          rotation: 90
